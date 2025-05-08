@@ -6,9 +6,9 @@ import os
 app = Flask(__name__)
 
 # Load the model and data
-model_bundle = joblib.load("full_player_performance_model.pkl")
+model_bundle = joblib.load("full_player_performance_model_new.pkl")
  
-df = pd.read_csv("srilanka_ODI_Stats.csv", encoding="ISO-8859-1")
+df = pd.read_csv("srilanka_ODI_Stats_new.csv", encoding="ISO-8859-1")
 df["Runs"] = pd.to_numeric(df["Runs"], errors="coerce")
 df.dropna(subset=["Runs"], inplace=True)
 df[["Player Name", "Ground", "Opposition", "Dismissal"]] = df[["Player Name", "Ground", "Opposition", "Dismissal"]].astype(str).apply(lambda x: x.str.strip().str.lower())
