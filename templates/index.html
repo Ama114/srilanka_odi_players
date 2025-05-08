@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Player Performance Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+    <!-- Video Background -->
+    <video autoplay muted loop id="bgVideo">
+        <source src="{{ url_for('static', filename='background.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Content Container -->
+    <div class="content">
+        <div class="container">
+            <h1>Player Performance at Selected Ground</h1>
+            <form method="post">
+                <label for="player">Select Player:</label>
+                <select name="player" id="player">
+                    {% for name in player_names %}
+                        <option value="{{ name }}" {% if selected_player == name %}selected{% endif %}>{{ name }}</option>
+                    {% endfor %}
+                </select>
+                <br><br>
+
+                <label for="ground">Select Ground:</label>
+                <select name="ground" id="ground">
+                     {% for ground in ground_names %}
+                         <option value="{{ ground }}" {% if selected_ground == ground %}selected{% endif %}>{{ ground }}</option>
+                     {% endfor %}
+                </select>
+                <br><br>
+                
+            
+
+
+
+
+
+
+
+                <button type="submit">Get Stats</button>
+            </form>
+
+            {% if player_image %}
+            <div class="player-photo">
+                <img src="{{ url_for('static', filename=player_image) }}" alt="{{ selected_player }}" width="200">
+            </div>
+            {% endif %}
+
+         {% if result %}
+            <div class="results-card">
+                <h2><i class="fas fa-chart-line"></i> Player Performance Results</h2>
+                <ul>
+                    {% for key, value in result.items() %}
+                        <li><span class="label">{{ key }}:</span> <span class="value">{{ value }}</span></li>
+                    {% endfor %}
+                </ul>
+            </div>
+         {% endif %}  
+        
+        
+        </div>
+    </div>
+</body>
+
+</html>
